@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">电竞 | Chenxi Li&#39;s Personal Blog</title>
+  <title itemprop="name">A Survey on TCP Variants For Data Center Networks | Chenxi Li&#39;s Personal Blog</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -468,12 +468,104 @@
   </div>
 </header>
 
-        <div class="pattern-center-blank"></div>
-  
-  <div id="content" class="site-content">
-    <article class="post-item post-301 page type-page status-publish has-post-thumbnail hentry">
-      
-      <!-- .entry-content -->
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+          <header class="entry-header">
+            <h1 class="entry-title">A Survey on TCP Variants For Data Center Networks</h1>
+            <p class="entry-census">小林&nbsp;·&nbsp;2019-12-30&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
+
+            <hr>
+          </header>
+        
+        <div class="entry-content">
+          <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p><em>With signiﬁcant growing demand of computing capacity, network technology like data center network (DCN) has been grown rapidly to be scalable and efﬁcient enough to support the hundreds of thousands of servers to handle the extremely high demands of cloud computing. However, there are still some challenges remaining which cannot be solved by traditional TCP algorithm. The shortcomings of tranditional TCP when deployed in DCNs like unable to ensure small latency with large sustained throughput have motivated the development of multiple new variants, including DCTCP, MPTCP, ICTCP, IATCP, and D2TCP[1]. These innovated TCP variants especially developed for DCN have been proved to have signiﬁcant advantage on solving network problems like congestion control. By emphasizing the available state-of-the-art techniques. an extensive review of the advantages and challendges of different TCP variants especially designed for DCN is provided.</em></p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>A data center is a facility that host computing resources networked together by communication infrastructure, which is the main support for the Exascale computing[2]. Ensuring the high performance of data center is the core enabler of efﬁcient large-scale computing like collecting, storing, processing, and distributing large amount of data. However, research has shown that today’s data centers are constrained by the interconnection networks instead of the computational power [3], consequently marking the data center network(DCNs) as the critical scalability bottleneck[4]. As one of the most dominant transport protocols which is applied widely in various kinds of Internet applications, transmission Control Protocol (TCP) constitutes majority of the trafﬁc in DCNs[5]. However, traditional TCP has been proven to have several performance impairments when being applied into DCNs and dualing with TCP incast, TCP outcast, queue buildup, and buffer pressure, which drives the motivation of deriving new versions of TCP speciﬁcally designed for DCNs[5]. Several research and studies on developing innovated TCP variants for DCNs and analysis of their performance have been done in the past few years. For example, in 2010, M. Alizadeh et al. ﬁrst proposed Data Center TCP (DCTCP), which leverages Explicit Congestion Notiﬁcation (ECN) to provide multi-but feedback to allow early react to congestion[5]. And C. Raiciu et al. proposed Multipath TCP (MPTCP) to enable effective use of available bandwidth almost at the same time[6]. The paper describes the current TCP problems facing by DCNs and the comparable study of proposed TCP variants which aim to overcome these problems in the following sections. The rest of the paper is organized as follows: Section II provides the inherent challenges that facing by TCP in DCNs. Section III provides a comparative study of proposed TCP variants for DCNs and performance analysis of each of the variants. Section IV summarizes the paper.</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Unlike regular network, trafﬁc in Data Center has much higher requirement to low latency with large sustained throughput. Considering the network trafﬁc set up by a TCP in DCNs, it can be classiﬁed into three types: mice trafﬁc, cat trafﬁc, and elephant trafﬁc[5]. Mice trafﬁc represents small-volume data transmission which requires short response times. Control state and co-ordination message form the cat trafﬁc, which means it is more sensitive to delay and requires low letancy. Elephant trafﬁc happens where there are large updates usually more than 5MB like video downloads which requires high network throughput. To handle all of these three trafﬁc, the DCNs need to be able to meet the requirements of high burst tolerance, low latency, and high throughput at the same time [5]. The original TCP shows to have impairments like TCP Incast, TCP Outcast, Queue build-up, and Buffer pressure when trying to handle all of these three trafﬁc[5].</p>
+<h3 id="TCP-Incast"><a href="#TCP-Incast" class="headerlink" title="TCP Incast"></a>TCP Incast</h3><p>Incast is a many-to-one communication pattern that happens when a receiver issues data requests to multiple senders at the same time. After receiving the requests, the senders will simultaneously send back a large amount of data to the receiver, which traverses bottlenect link in a many-to-one fashion[7]. Unable to process all of the response at one time, the buffer at receiver side would overﬂow due to the sudden network congestion, which may cause the dumping of some of the data packets. Lots of research has been done to propose possible solutions to TCP Incast. H. Wu et al. designed a TCP variant especially for solving Invast problem called Invast Congestion Control for TCP (ICTCP) at receiver side[8]. J. Hwang et al. proposed a rate based end-to-end congestion control algorithm called IA-TCP that avoids the TCP incast congestion problem effectively [9]. H. Tseng et al. proposed using a cross-layer ﬂow schedule with dynamical grouping scheme to reduce the effect of TCP incast in DCNs[10]. Y. Zhou et al. innvotively adopted a new network architecture - Named Data Networking to mitigate the Incast problem [11].</p>
+<h3 id="TCP-Outcast-Queue-buildup-and-Buffer-Pressure"><a href="#TCP-Outcast-Queue-buildup-and-Buffer-Pressure" class="headerlink" title="TCP Outcast, Queue buildup, and Buffer Pressure"></a>TCP Outcast, Queue buildup, and Buffer Pressure</h3><p>Many research has shown that when long and short ﬂows are mixed together, short ﬂows are more likely to be inﬂuenced by the long ﬂows and experience higher letancy, lower sharing of throughput, and higher loss rate. Outcast problem was ﬁrst observed by P. Prakash et al., which used to describe the unfairness of bandwidth sharing via TCP in DCNs organized in multi-rooted tree topologies. When a large set of ﬂows and a small set of ﬂows arrive at two ports of a switch destined to one common output port, the small set of ﬂows lose out on their throughput share signiﬁcantly (almost by an order of magnitude sometimes). The main reason of outcast problem is the usage of switches with simple taildrop queuing discipline[12]. This condition is easily met because fat-tree topology is widely applied in today’s data center and it enables the usage of large number of very low-price and low-performance switches to construct network employing taildrop queues at lower levels of the network hierarchy. Also, the experiments measured in RTT shows that when long and short ﬂows traverse the same queue, with the length of the bottleneck queue is grow up, the short ﬂows experience increased latency when they behind packets from the large ﬂows. Even if the long ﬂows do not traverse the same queue with show ﬂows, the loss rate of short ﬂows still depends on the number of long ﬂows traversing other ports since the activity on the different ports is coupled by shared memory pool [5].</p>
+<h2 id="TCP-Variants-for-Data-Center-Networks"><a href="#TCP-Variants-for-Data-Center-Networks" class="headerlink" title="TCP Variants for Data Center Networks"></a>TCP Variants for Data Center Networks</h2><h3 id="Data-Center-TCP-DCTCP"><a href="#Data-Center-TCP-DCTCP" class="headerlink" title="Data Center TCP - DCTCP"></a>Data Center TCP - DCTCP</h3><p>The key idea of DCTCP is to leverage the explicit congestion notiﬁcation (ECN) and modify the original ECN congestion control machanism to make the switches reponse much more quickly. Since most of the today’s switches use shallow buffer, quick reponse is essential to prevent the receiver’s buffer overﬂow before sender taking any congestion control action. In the original ECN, when the buffer occupancy(length of buffer queue) excends a certain threshold, the ECN-aware router would set the Congestion Experienced (CE) codepoint in the IP header of packets to notify the impending congestion. The difference here is originial ECN measures the average buffer occupancy while DCTCP meansures instantaneous buffer occupancy, which allows much sensitive and faster response[5].</p>
+<p>For the receiver part, the only difference here is the way information in CE codepoints is conveyed back to the sender. For the original ECN deﬁned in RFC 3168 standard, the receiver sets the ECN-Echo ﬂag in a series of ACK packets until it receives conﬁrmation from the sender that the congestion notiﬁcation has been received. For DCTCP, not only we want sender to know an congestion is going to happen, but also try to accurately convey the exact sequence of marked packets back to the sender. So it only set ECN-Echo ﬂag on the packet with a marked CE codepoint. However this method can not be directly implemented since Delayed ACKs is essential to be applied here. To solve this contradiction, a trivial two state state-machine is introduced here to determine whether to set ECN-Echo bit. When the ﬁrst time that the last received packet was detected to be marked with the CE codepoint, an ACK with ECN marked will be sent immediately. When the ﬁrst time that the last received packet was detected to be unmarked, an ACK with ECN unmarked will be sent immediately. Since sender knows how many packets each ACK covers, it can tell exactly how many packets almost cause congestion and the fraction of marked packets can further decide window decrease factor. Standard TCP cuts its window size by a factor of 2 when receiving ECN while in DCTCP, the larger this fraction is, the bigger the decrease factor would be. The reason why DCTCP want to do this is because most of the trafﬁc in DCNs is constructed by large ﬂows. Dropping the window in half would possibly leads to buffer underﬂows and loss of throughput[5].</p>
+<p>Several experiements have done to evaluate the performance of DCTCP. For throughput and queue length testing, it shows that the original TCP queue length is 10X larger and varies widely comparing to the DCTCP. DCTCP can maintain a stable, low queue length, which means DCTCP has much better tolerance to high burst. In fairness and con- vergence test, DCTCP is 2 times faster than original TCP to converge to ﬂows fair share. Also, in incast impairment testing, no matter under what condition (basic incast, manyto-one, all-to-all), DCTCP performs much better than TCP with lower latency, which provides DCTCP is an improvement to TCP for DCNs[5].</p>
+<h3 id="Multipath-TCP-MPTCP"><a href="#Multipath-TCP-MPTCP" class="headerlink" title="Multipath TCP - MPTCP"></a>Multipath TCP - MPTCP</h3><p>Data centers today have hundreds of thousands of servers, and run distributed applications across thousands of machines. Network becomes the bottleneck when the data centers try to spread large distributed computations across many racks of machines. Traditional topologies that DCNs applied are tree-based with very poor performance and no fault tolerance. To remedy this bottleneck, several dense parallel datacenter topologies like fat-tree and BCube have been proposed in company with equal-cost multi-path (ECMP) routing stategy to randomly hashing ﬂows to equal cost paths to balance load across the topology. The most obvious problem here is hashing collision. With typical load level for datacenter, using ECMP on multi-stage topologies like fat-tree and BCube cause ﬂows to collide with very high possiblity, which indicates that mapping each ﬂow to one path is the wrong place to start. Instead, MPTCP, which proposed by C. Raiciu et al., provides an innovated idea to pool capacity from different links to siginiﬁcantly improve the throughput, fairness, and robustness of the data center network when compared to single path TCP and randomized ﬂow-level load balancing[13].</p>
+<p>The key idea of MPTCP is to establish multiple subﬂows across different paths between the same pair of the end-points for a single TCP connection, which links the congestion control dynamics on multiple subﬂows. MPTCP is able to explicitly move trafﬁc away from the more congested paths to less congested paths. However, one challenge here is to handle the out-of-order subﬂows. Although sender send data in order, different subﬂows are transferred through different paths with different latency, which leads disorder. MPTCP solve this problem by adding another packet sequence number. Each packet has two sequence number. One is located at the TCP header which is used for reordering the data in the same subﬂow. The other one is data sequence number (DSN) which is used for reordering subﬂows. MPTCP ﬁrst reorders the packets in the same subﬂow respectively, then reorder the subﬂows to construct the received data in the original order.</p>
+<p>The congestion control on each subﬂow in MPTCP is same as original TCP. The key difference here is each subﬂow has its own congestion window. Each subﬂow can adjust its congestion window based on its own condition. More speciﬁcally, by making the window increase depend on the total window size, subﬂows that have larger windows increase faster than subﬂows with smaller windows, which enables the trafﬁc movement from more congested ones to the less congested ones [14]. Research experiments have proven that MPTCP has three main beneﬁts: better aggregate throughput, better fairness, and better robustness[14]. However, other research shows the improvements are conditional. L. Chaufournier et al. demonstrated that MPTCP may perform better when ﬂow sizes are sufﬁciently large to compensate for the overheads of MPTCP[15]. While M. Kheirkhah et al. introduced a novel transport protocol called MMPTCP to solve the problem that MPTCP hurts short ﬂows as the number of sub-ﬂows increases[16].</p>
+<h3 id="Solving-Invast-Problem-ICTCP-and-IATCP"><a href="#Solving-Invast-Problem-ICTCP-and-IATCP" class="headerlink" title="Solving Invast Problem - ICTCP and IATCP"></a>Solving Invast Problem - ICTCP and IATCP</h3><p>As mentioned in section 2, TCP incast is one of most important problems and challenges for original TCP. Research has proposed several algorithms like incast-avoidance algorithm for TCP (IA-TCP)[9] or even new TCP variants like incast control TCP(ICTCP)[8] to remedy this problem. For ICTCP, the main idea is to design a window based congestion control algorithm at TCP receiver side, as receiver knows how much throughput it has achieved and how much available bandwidth lieft. More speciﬁcally, ICTCP utilizes and modiﬁes the minimum of advertised window(rwnd) to avoid TCP incast. Rwnd is adjusted based on the ratio of difference between expected throughput, which is estimated by live RTT, and measured throughput over expected throughput. The available bandwidth would be used to allocated to co-ordinate to rwnd increase of all connections. Both ICTCP and DCTCP perform window based conges- tion control to avoid TCP incast, while IA-TCP applies rate based congestion control algorithm. IA-TCP limits the total number of outstanding data packets to avoid TCP invast. When the number of outstanding data packets is going to exceed the link capacity, IA-TCP adds a delay to ACK packet to avoid the aggregate data rate exceeding the link capacity. Both ICTCP and IA-TCP do not require any modiﬁcations at the sender or network elements and signiﬁcantly mitigate the TCP invast problem. But as they only focus on solving TCP invast, it is unclear if they can remedy the other challenges like TCP outcast, queue buildup, and buffer pressure[8][9].</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>In this paper, a comprehensive survey of existing TCP variants for datacenter network which are designed especially for solving original TCP impairments like TCP incast, TCP outcast, queue build-up and buffer pressure is performed. As today’s current data center is still mainly constrained by network performance, it is essential and meaningful to research on more advanced algorithms, protocols, topologies, and network devices to break this bottleneck. TCP variants listed in this paper make great contribution on the DCNs evolution, but shortcomings still exist in each of them. More innovated research and evaluations need to be done to continously improve DCNs performance to enable larger-scale computing possible in the future.</p>
+<h2 id="Acknowledge"><a href="#Acknowledge" class="headerlink" title="Acknowledge"></a>Acknowledge</h2><p>I want to thank Dr. Gregory Kesden for providing the slides and presenting lectures related to Data Center Networking Topologies and Transport-Layer Concerns. I also want to thank him for providing such a great opportunity for me to explore the research and challenges of today’s data center network.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[1] Truc Anh N. Nguyen, Siddharth Gangadhar, and James P. G. Sterbenz. 2016. Performance Evaluation of TCP Congestion Control Algorithms in Data Center Networks. In Proceedings of the 11th International Conference on Future Internet Technologies (CFI ’16). ACM, New York, NY, USA, 21-28. DOI: <a href="https://doi.org/10.1145/2935663.2935669" target="_blank" rel="noopener">https://doi.org/10.1145/2935663.2935669</a></p>
+<p>[2] K. Bilal, S.U. Khan, L. Zhang, H. Li, K. Hayat, S.A. Madani, N. Min-Allah, L. Wang, D. Chen, Quantitative comparisons of the state of the art data center architectures , Concurrency and Computation:</p>
+<p>Practice and Experience 25 (12) (2013) 1771–1783. <a href="http://dx.doi.org/10.1002/cpe.2963" target="_blank" rel="noopener">http://dx.doi.org/10.1002/cpe.2963</a>.</p>
+<p>[3] K. Bergman, Optically interconnected high performance data centers, in: 2010 36th European Conference and Exhibition on Optical Communication, ECOC, September 2010, pp. 1–3.</p>
+<p>[4] K. Bilal, et al., A taxonomy and vey on Green Data Center Networks, ture Generation Computer Systems <a href="http://dx.doi.org/10.1016/j.future.2013.07.006" target="_blank" rel="noopener">http://dx.doi.org/10.1016/j.future.2013.07.006</a></p>
+<p>surFu(2013),</p>
+<p>[5] M. Alizadeh, A. Greenberg, D. A. Maltz, J. Padhye, P. Patel, B. Prabhakar, S. Sengupta, and M. Sridharan, Data Center TCP (DCTCP), SIGCOMM Computer Communications Review, vol. 40, no. 4, pp. 63–74, Aug. 2010. [Online]. Available: <a href="http://doi.acm.org/10.1145/1851275.1851192" target="_blank" rel="noopener">http://doi.acm.org/10.1145/1851275.1851192</a></p>
+<p>[6] Costin Raiciu, Christopher Pluntke, Sebastien Barre, Adam Greenhalgh, Damon Wischik, and Mark Handley. 2010. Data center networking with multipath TCP. In Proceedings of the 9th ACM SIGCOMM Workshop on Hot Topics in Networks (Hotnets-IX). ACM, New York, NY, USA, , Article 10 , 6 pages. DOI=<a href="http://dx.doi.org/10.1145/1868447.1868457" target="_blank" rel="noopener">http://dx.doi.org/10.1145/1868447.1868457</a></p>
+<p>[7] Yanpei Chen, Rean Grifﬁth, Junda Liu, Randy H. Katz, and Anthony D. Joseph. 2009. Understanding TCP incast throughput collapse in datacenter networks. In Proceedings of the 1st ACM workshop on Research on enterprise networking (WREN ’09). ACM, New York, NY, USA, 73-82. DOI=<a href="http://dx.doi.org/10.1145/1592681.1592693" target="_blank" rel="noopener">http://dx.doi.org/10.1145/1592681.1592693</a></p>
+<p>[8] Haitao Wu, Zhenqian Feng, Chuanxiong Guo, and Yongguang Zhang. 2010. ICTCP: Incast Congestion Control for TCP in data center networks. In Proceedings of the 6th International COnference (Co-NEXT ’10). ACM, New York, NY, USA, , Article 13 , 12 pages. DOI=<a href="http://dx.doi.org/10.1145/1921168.1921186" target="_blank" rel="noopener">http://dx.doi.org/10.1145/1921168.1921186</a></p>
+<p>[9] J. Hwang, J. Yoo and N. Choi, IA-TCP: A rate based incast-avoidance algorithm for TCP in data center networks, 2012 IEEE International Conference on Communications (ICC), Ottawa, ON, 2012, pp. 1292-1296. doi: 10.1109/ICC.2012.6364079</p>
+<p>[10] Hsueh-Wen Tseng, Wan-Chi Chang, I-Hsuan Peng, and Pei-Shan Chen. 2016. A Cross-Layer Flow Schedule with Dynamical Grouping for Avoiding TCP Incast Problem in Data Center Networks. In Proceedings of the International Conference on Research in Adaptive and Convergent Systems (RACS ’16). ACM, New York, NY, USA, 91-96. DOI: <a href="https://doi.org/10.1145/2987386.2987389" target="_blank" rel="noopener">https://doi.org/10.1145/2987386.2987389</a></p>
+<p>[11] Yaqiu Zhou, Yongmao Ren, Xu Zhou, Zhentao Li, and Pengfei Fan. 2018. A Congestion Control Mechanism for Data Center Networks Based on Named Data Networking. In Proceedings of the 13th International Conference on Future Internet Technologies (CFI 2018). ACM, New York, NY, USA, Article 6, 6 pages. DOI: <a href="https://doi.org/10.1145/3226052.3226055" target="_blank" rel="noopener">https://doi.org/10.1145/3226052.3226055</a></p>
+<p>[12] Pawan Prakash, Advait Dixit, Y. Charlie Hu, and Ramana Kompella. 2012. The TCP outcast problem: exposing unfairness in data center networks. In Proceedings of the 9th USENIX conference on Networked Systems Design and Implementation (NSDI’12). USENIX Association, Berkeley, CA, USA, 30-30.</p>
+<p>[13] Costin Raiciu, Sebastien Barre, Christopher Pluntke, Adam Greenhalgh, Damon Wischik, and Mark Handley. 2011. Improving datacenter performance and robustness with multipath TCP. In Proceedings of the ACM SIGCOMM 2011 conference (SIGCOMM ’11). ACM, New York, NY, USA, 266-277. DOI: <a href="https://doi.org/10.1145/2018436.2018467" target="_blank" rel="noopener">https://doi.org/10.1145/2018436.2018467</a></p>
+<p>[14] D. Wischik, C. Raiciu, A. Greenhalgh, and M. Handley. Design, implementation and evaluation of congestion control for multipath TCP. In Proc. Usenix NSDI 2011.</p>
+<p>[15] Lucas Chaufournier, Ahmed Ali-Eldin, Prateek Sharma, Prashant Shenoy, and Don Towsley. 2019. Performance Evaluation of Multi-Path TCP for Data Center and Cloud Workloads. In Proceedings of the 2019 ACM/SPEC International Conference on Performance Engineering (ICPE ’19). ACM, New York, NY, USA, 13-24. DOI: <a href="https://doi.org/10.1145/3297663.3310295" target="_blank" rel="noopener">https://doi.org/10.1145/3297663.3310295</a></p>
+<p>[16] Morteza Kheirkhah, Ian Wakeman, and George Parisis. 2015.Short vs. Long Flows: A Battle That Both Can Win. SIGCOMM Comput. Commun. Rev. 45, 4 (August 2015), 349-350. DOI: <a href="https://doi.org/10.1145/2829988.2790018" target="_blank" rel="noopener">https://doi.org/10.1145/2829988.2790018</a></p>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/chenxi1103/cdn@1.4/img/custom/donate/AliPayQR.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/chenxi1103/cdn@1.4/img/custom/donate/WeChanQR.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2019/12/25/PY.html/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                test post</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
       
 <div id="vcomments"></div>
 <script>
@@ -489,43 +581,25 @@
   }
 </script>
 
-      <div class="single-reward">
-        <div class="reward-open">赏
-          <div class="reward-main">
-            <ul class="reward-row">
-              <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/chenxi1103/cdn@1.4/img/custom/donate/AliPayQR.jpg"></li>
-              <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/chenxi1103/cdn@1.4/img/custom/donate/WeChanQR.jpg"></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
-      <footer class="post-footer">
-        <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
-        <div class="post-tags">
-        </div>
-        <div class="post-share">
-          <div class="social-share sharehidden share-component"></div>
-          <i class="iconfont show-share icon-forward"></i>
-        </div>
-      </footer><!-- .entry-footer -->
-    </article>
-      <!-- #post-## -->
       <section class="author-profile">
         <div class="info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <a href="/about/" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/chenxi1103/cdn@1.4/images/avatar.jpeg" itemprop="image" alt="小林酱" height="70" width="70"></a>
+          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="小林" height="70" width="70"></a>
           <div class="meta">
             <span class="title">Author</span>
             <h3 itemprop="name">
-            <a href="https://sakura.hojun.cn" target="_blank" itemprop="url" rel="author noopener">小林酱</a>
+            <a href="" itemprop="url" rel="author">小林</a>
             </h3>
           </div>
         </div>
         <hr>
-        <p><i class="iconfont icon-write"></i>贝尔维尤石原里美，梦想出道の非典型程序媛小林</p>
+        <p><i class="iconfont icon-write"></i></p>
       </section>
+    </main><!-- #main -->
   </div><!-- #primary -->
 </div>
+
+
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>
